@@ -72,6 +72,124 @@ img {
   20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
+/* Floating Hearts Animation */
+#section-valentine .floating-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#section-valentine .heart {
+  position: absolute !important;
+  font-size: 36px;
+  color: #ff9494;
+  opacity: 0;
+  bottom: -50px;
+  left: auto;
+  right: auto;
+  top: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  text-align: left !important;
+  transform: translateX(0);
+  animation: floatHeart 8s infinite ease-in-out;
+}
+
+#section-valentine .heart-1 {
+  left: 10% !important;
+  bottom: -30px;
+  animation-delay: 0s;
+  font-size: 32px;
+}
+
+#section-valentine .heart-2 {
+  left: 20% !important;
+  bottom: -50px;
+  animation-delay: 1s;
+  font-size: 42px;
+}
+
+#section-valentine .heart-3 {
+  left: 30% !important;
+  bottom: -40px;
+  animation-delay: 2s;
+  font-size: 34px;
+}
+
+#section-valentine .heart-4 {
+  left: 40% !important;
+  bottom: -60px;
+  animation-delay: 0.5s;
+  font-size: 38px;
+}
+
+#section-valentine .heart-5 {
+  left: 50% !important;
+  bottom: -35px;
+  animation-delay: 1.5s;
+  font-size: 36px;
+}
+
+#section-valentine .heart-6 {
+  left: 60% !important;
+  bottom: -45px;
+  animation-delay: 2.5s;
+  font-size: 32px;
+}
+
+#section-valentine .heart-7 {
+  left: 70% !important;
+  bottom: -55px;
+  animation-delay: 0.8s;
+  font-size: 44px;
+}
+
+#section-valentine .heart-8 {
+  left: 85% !important;
+  bottom: -40px;
+  animation-delay: 3s;
+  font-size: 34px;
+}
+
+@keyframes floatHeart {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50vh) translateX(20px) rotate(180deg) scale(1);
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) translateX(-20px) rotate(360deg) scale(0.5);
+  }
+}
+
+/* Ensure section content is above animations */
+#section-valentine {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#section-valentine .section-content {
+  position: relative;
+  z-index: 10;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   #valentineQuestion {
@@ -91,5 +209,9 @@ img {
     height: auto;
     max-width: 90%;
     width: auto;
+  }
+  
+  #section-valentine .heart {
+    font-size: 28px;
   }
 }

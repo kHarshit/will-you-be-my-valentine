@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Be My Valentine</title>
     <link rel="stylesheet" href="css/spa.css" />
+    <link rel="stylesheet" href="css/valentine.css" />
     <link rel="stylesheet" href="css/flower.css" />
   </head>
   <body>
@@ -15,31 +16,29 @@
 
     <!-- Section 1: Valentine Question -->
     <section class="section active" id="section-valentine" data-section="0">
+      <!-- Floating Hearts -->
+      <div class="floating-hearts">
+        <div class="heart heart-1">♥</div>
+        <div class="heart heart-2">♥</div>
+        <div class="heart heart-3">♥</div>
+        <div class="heart heart-4">♥</div>
+        <div class="heart heart-5">♥</div>
+        <div class="heart heart-6">♥</div>
+        <div class="heart heart-7">♥</div>
+        <div class="heart heart-8">♥</div>
+      </div>
+      
       <div class="section-content">
         <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
         <button class="answerButton" id="yesButton">Yes</button>
         <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
         <br />
-        <img src="please.png" height="498px" width="150px" alt="cat asking question" class="responsive" />
+        <img src="rose.png" height="100px" width="50px" alt="" class="responsive" />
       </div>
     </section>
 
-    <!-- Section 2: Thank You (after Yes) -->
-    <section class="section" id="section-thankyou" data-section="1">
-      <div class="section-content">
-        <div id="thankyou"><b>Thank you!</b></div>
-        <img height="300px" id="rizz" src="thanks.png" alt="rizzler god" class="responsive" />
-        <br />
-        <audio id="congratulationsAudio" controls autoplay loop>
-          <source src="congratulations.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-        <h1>Let's plan our perfect date!</h1>
-      </div>
-    </section>
-
-    <!-- Section 3: Date Selection -->
-    <section class="section" id="section-date" data-section="2">
+    <!-- Section 2: Date Selection -->
+    <section class="section" id="section-date" data-section="1">
       <div class="section-content">
         <h1 title="choose a date">Are you free on ...</h1>
         <form class="form-group" id="dateForm">
@@ -51,8 +50,8 @@
       </div>
     </section>
 
-    <!-- Section 4: Food Selection -->
-    <section class="section" id="section-food" data-section="3">
+    <!-- Section 3: Food Selection -->
+    <section class="section" id="section-food" data-section="2">
       <div class="section-content">
         <div id="foodquestion"><b>What food would you like to eat?</b></div>
         <div class="food-selection">
@@ -92,8 +91,8 @@
       </div>
     </section>
 
-    <!-- Section 5: Dessert Selection -->
-    <section class="section" id="section-dessert" data-section="4">
+    <!-- Section 4: Dessert Selection -->
+    <section class="section" id="section-dessert" data-section="3">
       <div class="section-content">
         <div id="dessertquestion"><b>Which dessert we eatin cuh</b></div>
         <div class="dessert-selection">
@@ -125,8 +124,8 @@
       </div>
     </section>
 
-    <!-- Section 6: Activities Selection -->
-    <section class="section" id="section-activities" data-section="5">
+    <!-- Section 5: Activities Selection -->
+    <section class="section" id="section-activities" data-section="4">
       <div class="section-content">
         <div id="activityquestion"><b>What are we doing after?</b></div>
         <div class="activities-selection">
@@ -158,8 +157,8 @@
       </div>
     </section>
 
-    <!-- Section 7: Final Results -->
-    <section class="section" id="section-results" data-section="6">
+    <!-- Section 6: Final Results -->
+    <section class="section" id="section-results" data-section="5">
       <div class="section-content">
         <div id="thankyou-final"><b>Thank you for being my valentine 💕</b></div>
         

@@ -2,7 +2,7 @@
 class SPAController {
   constructor() {
     this.currentSection = 0;
-    this.totalSections = 7;
+    this.totalSections = 6;
     this.sections = [];
     this.data = {
       valentineResponse: null,
@@ -38,7 +38,7 @@ class SPAController {
       yesButton.addEventListener('click', () => {
         this.data.valentineResponse = 'Yes';
         this.saveData();
-        this.showSection(1); // Thank you section
+        this.showSection(1); // Date selection section
       });
     }
     
@@ -91,7 +91,7 @@ class SPAController {
           this.showSection(nextSection);
           
           // If moving to results section, display results
-          if (nextSection === 6) {
+          if (nextSection === 5) {
             setTimeout(() => {
               this.displayResults();
             }, 100);
@@ -138,6 +138,54 @@ class SPAController {
         this.showSection(this.currentSection + 1);
       }
     });
+
+    // Make images clickable to toggle checkboxes
+    this.setupImageClickHandlers();
+  }
+
+  setupImageClickHandlers() {
+    // Food section images
+    const foodItems = document.querySelectorAll('.food-item');
+    foodItems.forEach(item => {
+      const img = item.querySelector('img');
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (img && checkbox) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          checkbox.checked = !checkbox.checked;
+          // Trigger change event to ensure data is saved
+          checkbox.dispatchEvent(new Event('change'));
+        });
+      }
+    });
+
+    // Dessert section images
+    const dessertItems = document.querySelectorAll('.dessert-item');
+    dessertItems.forEach(item => {
+      const img = item.querySelector('img');
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (img && checkbox) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event('change'));
+        });
+      }
+    });
+
+    // Activities section images
+    const activityItems = document.querySelectorAll('.activity-item');
+    activityItems.forEach(item => {
+      const img = item.querySelector('img');
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (img && checkbox) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event('change'));
+        });
+      }
+    });
   }
 
   showSection(index) {
@@ -159,26 +207,33 @@ class SPAController {
       
       // Update progress bar
       this.updateProgress();
+      
+      // If showing results section, display results
+      if (index === 5) {
+        setTimeout(() => {
+          this.displayResults();
+        }, 100);
+      }
     }
   }
 
   saveCurrentSectionData() {
     // Save data from current section before navigating
-    if (this.currentSection === 2) {
+    if (this.currentSection === 1) {
       // Date section
       const dateInput = document.getElementById('dateInput');
       if (dateInput && dateInput.value) {
         this.data.date = dateInput.value;
       }
-    } else if (this.currentSection === 3) {
+    } else if (this.currentSection === 2) {
       // Food section
       const checkboxes = document.querySelectorAll('input[name="food"]:checked');
       this.data.food = Array.from(checkboxes).map(cb => cb.value);
-    } else if (this.currentSection === 4) {
+    } else if (this.currentSection === 3) {
       // Dessert section
       const checkboxes = document.querySelectorAll('input[name="dessert"]:checked');
       this.data.dessert = Array.from(checkboxes).map(cb => cb.value);
-    } else if (this.currentSection === 5) {
+    } else if (this.currentSection === 4) {
       // Activities section
       const checkboxes = document.querySelectorAll('input[name="activities"]:checked');
       this.data.activities = Array.from(checkboxes).map(cb => cb.value);
@@ -210,15 +265,13 @@ class SPAController {
   updateProgress() {
     const progressBar = document.getElementById('progressBar');
     if (progressBar) {
-      // Calculate progress (skip section 1 - thank you)
+      // Calculate progress
       let progress = 0;
       if (this.currentSection === 0) {
         progress = 0;
-      } else if (this.currentSection === 1) {
-        progress = 15;
       } else {
-        // Sections 2-6 (date through results)
-        progress = 15 + ((this.currentSection - 1) / 5) * 85;
+        // Sections 1-5 (date through results)
+        progress = (this.currentSection / 5) * 100;
       }
       progressBar.style.width = progress + '%';
     }
@@ -250,12 +303,21 @@ class SPAController {
     const summary = document.getElementById('resultsSummary');
     if (!summary) return;
 
-    const foodList = this.data.food.length > 0 ? this.data.food.join(', ') : 'None selected';
-    const dessertList = this.data.dessert.length > 0 ? this.data.dessert.join(', ') : 'None selected';
-    const activitiesList = this.data.activities.length > 0 ? this.data.activities.join(', ') : 'None selected';
+    // Get the latest data from valentineData to ensure we have all saved data
+    let data;
+    if (typeof valentineData !== 'undefined') {
+      data = valentineData.getAllData();
+    } else {
+      // Fallback to this.data if valentineData is not available
+      data = this.data;
+    }
+
+    const foodList = (data.food && data.food.length > 0) ? data.food.join(', ') : 'None selected';
+    const dessertList = (data.dessert && data.dessert.length > 0) ? data.dessert.join(', ') : 'None selected';
+    const activitiesList = (data.activities && data.activities.length > 0) ? data.activities.join(', ') : 'None selected';
 
     summary.innerHTML = `
-      <div class="result-item"><strong>Date:</strong> ${this.data.date || 'Not selected'}</div>
+      <div class="result-item"><strong>Date:</strong> ${data.date || 'Not selected'}</div>
       <div class="result-item"><strong>Food:</strong> ${foodList}</div>
       <div class="result-item"><strong>Dessert:</strong> ${dessertList}</div>
       <div class="result-item"><strong>Activities:</strong> ${activitiesList}</div>
