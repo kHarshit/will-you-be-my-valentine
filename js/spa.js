@@ -335,9 +335,9 @@ Completed on: ${new Date().toLocaleString()}`,
 
       // EmailJS configuration - UPDATE THESE VALUES
       const emailConfig = {
-        serviceID: 'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        templateID: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-        publicKey: 'YOUR_PUBLIC_KEY', // Replace with your EmailJS public key
+        serviceID: 'service_6g9um7q', // Replace with your EmailJS service ID
+        templateID: 'template_7l9l94a', // Replace with your EmailJS template ID
+        publicKey: '7qeYaFdfBWuUhVS9m', // Replace with your EmailJS public key
       };
 
       // Initialize EmailJS if not already done
