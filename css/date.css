@@ -44,6 +44,49 @@ form .header {
   background-color: #ff9494;
   color: #ffe3e1;
   border: 2px solid #ff9494;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 4px #ff9494;
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+h1 {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+    padding: 0 10px;
+  }
+  
+  .form-group {
+    font-size: 18px;
+  }
+  
+  input[type="date"] {
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  .button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
 }
 
 input[type="date"] {

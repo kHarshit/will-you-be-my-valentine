@@ -8,6 +8,7 @@ body {
 #thankyou {
   font-size: 50px;
   margin-bottom: 20px;
+  animation: fadeIn 1s ease-in;
 }
 .rizz {
   margin-bottom: 10 px;
@@ -24,7 +25,7 @@ body {
   border-radius: 12px;
   border: 2px solid #ffe3e1;
   box-shadow: 1px 1px 2px #ff9494;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .button:hover {
@@ -32,4 +33,145 @@ body {
   color: #ffe3e1;
   border: 2px solid #ff9494;
   box-shadow: 1px 1px 2px #ffe3e1;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.results-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(255, 148, 148, 0.2);
+  animation: slideUp 0.6s ease-out;
+}
+
+.results-container h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #ff9494;
+}
+
+.results-summary {
+  text-align: left;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: rgba(255, 227, 225, 0.5);
+  border-radius: 10px;
+}
+
+.result-item {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.result-item strong {
+  color: #e67373;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.email-form {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(255, 227, 225, 0.3);
+  border-radius: 10px;
+}
+
+.email-form h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.email-form input[type="email"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: "courier";
+  margin: 10px 5px;
+  background-color: #fff;
+  color: #e67373;
+  border-radius: 8px;
+  border: 2px solid #ffe3e1;
+  width: 250px;
+  max-width: 100%;
+}
+
+.email-form input[type="email"]:focus {
+  outline: none;
+  border-color: #ff9494;
+  box-shadow: 0 0 5px rgba(255, 148, 148, 0.3);
+}
+
+#emailStatus {
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #thankyou {
+    font-size: 32px;
+    padding: 0 10px;
+  }
+  
+  .results-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .results-container h2 {
+    font-size: 22px;
+  }
+  
+  .result-item {
+    font-size: 14px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button {
+    width: 80%;
+    font-size: 16px;
+  }
+  
+  .email-form input[type="email"] {
+    width: 90%;
+  }
 }

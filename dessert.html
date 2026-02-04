@@ -47,8 +47,33 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='activities.html'">
+    <button class="button" id="continueButton">
       Continue UwU
     </button>
+
+    <script src="js/data-collector.js"></script>
+    <script>
+      document.getElementById('continueButton').addEventListener('click', function() {
+        if (typeof valentineData === 'undefined') {
+          console.error('valentineData not loaded');
+          alert('Error: Please refresh the page and try again.');
+          return;
+        }
+        // Collect all selected dessert items
+        const checkboxes = document.querySelectorAll('input[name="dessert"]:checked');
+        const selectedDessert = Array.from(checkboxes).map(cb => cb.value);
+        valentineData.setDessert(selectedDessert);
+        
+        // Verify data was saved
+        const saved = localStorage.getItem('valentine_questionnaire_data');
+        console.log('Dessert saved, localStorage contains:', saved);
+        
+        // Add transition effect
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          location.href = 'activities.html';
+        }, 200);
+      });
+    </script>
   </body>
 </html>

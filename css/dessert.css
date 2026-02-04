@@ -9,12 +9,17 @@ body {
   font-size: 50px;
   margin-bottom: 30px;
   font-weight: bold;
+  animation: fadeIn 0.8s ease-in;
 }
 .dessert-item {
   display: inline-table;
   margin: 10px;
   vertical-align: top;
   color: #ff9494;
+  transition: transform 0.3s ease;
+}
+.dessert-item:hover {
+  transform: translateY(-5px);
 }
 .dessert-item img {
   height: 200px;
@@ -23,9 +28,34 @@ body {
   border: 5px solid #ff9494;
   object-fit: cover;
   padding: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.dessert-item img:hover {
+  border-color: #e67373;
+  box-shadow: 0 4px 8px rgba(255, 148, 148, 0.4);
+  transform: scale(1.05);
 }
 .dessert-item label {
   display: block;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.dessert-item label:hover {
+  color: #e67373;
+}
+.dessert-item input[type="checkbox"] {
+  margin-right: 5px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.dessert-item input[type="checkbox"]:checked {
+  accent-color: #e67373;
+}
+.dessert-item:has(input[type="checkbox"]:checked) label {
+  font-weight: bold;
+  color: #e67373;
 }
 .button {
   padding: 10px 20px;
@@ -38,4 +68,48 @@ body {
   color: #e67373;
   border-radius: 12px;
   border: 2px solid #ffe3e1;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 2px #ff9494;
+}
+.button:hover {
+  background-color: #ff9494;
+  color: #ffe3e1;
+  border: 2px solid #ff9494;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 4px #ff9494;
+}
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #dessertquestion {
+    font-size: 32px;
+    padding: 0 10px;
+  }
+  
+  .dessert-item {
+    margin: 8px;
+  }
+  
+  .dessert-item img {
+    height: 150px;
+    width: 150px;
+  }
+  
+  .button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
 }

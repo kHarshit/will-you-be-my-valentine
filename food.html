@@ -57,8 +57,33 @@
         <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
       </div>
     </div>
-    <button class="button" onclick="location.href='dessert.html'">
+    <button class="button" id="continueButton">
       Continue Hihihhh... 
     </button>
+
+    <script src="js/data-collector.js"></script>
+    <script>
+      document.getElementById('continueButton').addEventListener('click', function() {
+        if (typeof valentineData === 'undefined') {
+          console.error('valentineData not loaded');
+          alert('Error: Please refresh the page and try again.');
+          return;
+        }
+        // Collect all selected food items
+        const checkboxes = document.querySelectorAll('input[name="food"]:checked');
+        const selectedFood = Array.from(checkboxes).map(cb => cb.value);
+        valentineData.setFood(selectedFood);
+        
+        // Verify data was saved
+        const saved = localStorage.getItem('valentine_questionnaire_data');
+        console.log('Food saved, localStorage contains:', saved);
+        
+        // Add transition effect
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          location.href = 'dessert.html';
+        }, 200);
+      });
+    </script>
   </body>
 </html>

@@ -8,12 +8,17 @@ body {
 #foodquestion {
   font-size: 50px;
   margin-bottom: 30px;
+  animation: fadeIn 0.8s ease-in;
 }
 .food-item {
   display: inline-block;
   margin: 10px;
   vertical-align: top;
   color: #ff9494;
+  transition: transform 0.3s ease;
+}
+.food-item:hover {
+  transform: translateY(-5px);
 }
 .food-item img {
   height: 200px;
@@ -22,9 +27,34 @@ body {
   border: 5px solid #ff9494;
   object-fit: cover;
   padding: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.food-item img:hover {
+  border-color: #e67373;
+  box-shadow: 0 4px 8px rgba(255, 148, 148, 0.4);
+  transform: scale(1.05);
 }
 .food-item label {
   display: block;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.food-item label:hover {
+  color: #e67373;
+}
+.food-item input[type="checkbox"] {
+  margin-right: 5px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.food-item input[type="checkbox"]:checked {
+  accent-color: #e67373;
+}
+.food-item:has(input[type="checkbox"]:checked) label {
+  font-weight: bold;
+  color: #e67373;
 }
 .button {
   padding: 10px 20px;
@@ -37,4 +67,48 @@ body {
   color: #e67373;
   border-radius: 12px;
   border: 2px solid #ffe3e1;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 2px #ff9494;
+}
+.button:hover {
+  background-color: #ff9494;
+  color: #ffe3e1;
+  border: 2px solid #ff9494;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 4px #ff9494;
+}
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #foodquestion {
+    font-size: 32px;
+    padding: 0 10px;
+  }
+  
+  .food-item {
+    margin: 8px;
+  }
+  
+  .food-item img {
+    height: 150px;
+    width: 150px;
+  }
+  
+  .button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
 }

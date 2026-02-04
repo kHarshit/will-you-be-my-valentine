@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="css/valentine.css" />
+  </head>
+  <body>
+    <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
+    <button class="answerButton" id="yesButton">
+      Yes
+    </button>
+    <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
+    <br />
+    <img src="please.png" height="498px" width="150px" alt="cat asking question" class="responsive" />
+
+    <script src="js/data-collector.js"></script>
+    <script>
+      // Handle Yes button
+      document.getElementById("yesButton").addEventListener("click", function () {
+        valentineData.setValentineResponse('Yes');
+        // Add a small delay for better UX
+        this.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          location.href = 'thankyou.html';
+        }, 200);
+      });
+
+      // Handle No button with growing Yes button
+      document.getElementById("noButton").addEventListener("click", function () {
+        valentineData.setValentineResponse('No');
+        var yesButton = document.getElementById("yesButton");
+        var currentFontSize = parseInt(
+          window.getComputedStyle(yesButton).fontSize
+        );
+        yesButton.style.fontSize = currentFontSize + 10 + "px";
+        yesButton.style.transform = 'scale(1.05)';
+        
+        // Add shake animation
+        this.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          this.style.animation = '';
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

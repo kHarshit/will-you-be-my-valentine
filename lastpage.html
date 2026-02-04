@@ -3,11 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Thank You!</title>
     <link rel="stylesheet" href="css/flower.css" />
+    <link rel="stylesheet" href="css/lastpage.css" />
   </head>
   <body>
     <div id="thankyou"><b>Thank you for being my girlfriend</b></div>
+    
+    <div class="results-container" id="resultsContainer">
+      <h2>Your Perfect Date Plan:</h2>
+      <div class="results-summary" id="resultsSummary"></div>
+      
+      <div class="action-buttons">
+        <button class="button" id="downloadButton">📥 Download Answers</button>
+        <button class="button" id="emailButton">📧 Send to Me</button>
+      </div>
+      
+      <div id="emailForm" class="email-form" style="display: none;">
+        <h3>Send Results via Email</h3>
+        <p><small>To use email functionality, you'll need to set up EmailJS. See instructions in README.</small></p>
+        <input type="email" id="emailInput" placeholder="Your email address" />
+        <button class="button" id="sendEmailButton">Send Email</button>
+        <div id="emailStatus"></div>
+      </div>
+    </div>
+
     <div class="flower">
       <div class="f-wrapper">
         <div class="flower__line"></div>
@@ -58,5 +78,118 @@
       </div>
       <div class="flower__glass"></div>
     </div>
+
+    <!-- EmailJS SDK - Add your public key in the init() call below -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="js/data-collector.js"></script>
+    <script>
+      // Initialize EmailJS - Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+      // Get it from: https://dashboard.emailjs.com/admin/integration
+      // Uncomment the line below and add your public key:
+      // emailjs.init("YOUR_PUBLIC_KEY");
+      // Display results summary
+      function displayResults() {
+        // Check if valentineData is available
+        if (typeof valentineData === 'undefined') {
+          console.error('valentineData is not defined. Check if js/data-collector.js is loaded.');
+          document.getElementById('resultsSummary').innerHTML = 
+            '<div class="result-item" style="color: #ff9494;">Error: Data collector not loaded. Please refresh the page.</div>';
+          return;
+        }
+        
+        // First, check what's in localStorage directly
+        const rawStored = localStorage.getItem('valentine_questionnaire_data');
+        console.log('Raw localStorage data:', rawStored);
+        if (rawStored) {
+          try {
+            const parsed = JSON.parse(rawStored);
+            console.log('Parsed localStorage data:', parsed);
+          } catch (e) {
+            console.error('Error parsing localStorage data:', e);
+          }
+        }
+        
+        // Now get data from the collector
+        const data = valentineData.getAllData();
+        const summary = document.getElementById('resultsSummary');
+        
+        console.log('Displaying results with data from getAllData():', data);
+        console.log('Data from valentineData.data directly:', valentineData.data);
+        
+        const foodList = data.food && data.food.length > 0 ? data.food.join(', ') : 'None selected';
+        const dessertList = data.dessert && data.dessert.length > 0 ? data.dessert.join(', ') : 'None selected';
+        const activitiesList = data.activities && data.activities.length > 0 ? data.activities.join(', ') : 'None selected';
+        
+        summary.innerHTML = `
+          <div class="result-item"><strong>Date:</strong> ${data.date || 'Not selected'}</div>
+          <div class="result-item"><strong>Food:</strong> ${foodList}</div>
+          <div class="result-item"><strong>Dessert:</strong> ${dessertList}</div>
+          <div class="result-item"><strong>Activities:</strong> ${activitiesList}</div>
+        `;
+      }
+
+      // Download button
+      document.getElementById('downloadButton').addEventListener('click', function() {
+        valentineData.downloadData();
+        this.textContent = '✓ Downloaded!';
+        setTimeout(() => {
+          this.textContent = '📥 Download Answers';
+        }, 2000);
+      });
+
+      // Email button
+      document.getElementById('emailButton').addEventListener('click', function() {
+        const emailForm = document.getElementById('emailForm');
+        emailForm.style.display = emailForm.style.display === 'none' ? 'block' : 'none';
+      });
+
+      // Send email button
+      document.getElementById('sendEmailButton').addEventListener('click', async function() {
+        const emailInput = document.getElementById('emailInput');
+        const emailStatus = document.getElementById('emailStatus');
+        const email = emailInput.value.trim();
+        
+        if (!email) {
+          emailStatus.textContent = 'Please enter an email address';
+          emailStatus.style.color = '#ff9494';
+          return;
+        }
+
+        // Check if EmailJS is configured
+        if (typeof emailjs === 'undefined') {
+          emailStatus.innerHTML = '<small>EmailJS not configured. Please see README for setup instructions, or use the download option.</small>';
+          emailStatus.style.color = '#ff9494';
+          return;
+        }
+
+        this.textContent = 'Sending...';
+        this.disabled = true;
+
+        // EmailJS configuration - UPDATE THESE VALUES
+        const emailConfig = {
+          serviceID: 'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+          templateID: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+          publicKey: 'YOUR_PUBLIC_KEY', // Replace with your EmailJS public key
+          toEmail: email
+        };
+
+        const result = await valentineData.sendEmail(emailConfig);
+        
+        if (result.success) {
+          emailStatus.textContent = '✓ Email sent successfully!';
+          emailStatus.style.color = '#4caf50';
+          emailInput.value = '';
+        } else {
+          emailStatus.textContent = '✗ Error: ' + (result.error || 'Failed to send email');
+          emailStatus.style.color = '#ff9494';
+        }
+
+        this.textContent = 'Send Email';
+        this.disabled = false;
+      });
+
+      // Display results on page load
+      displayResults();
+    </script>
   </body>
 </html>

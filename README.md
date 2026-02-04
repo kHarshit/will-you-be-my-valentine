@@ -11,13 +11,46 @@ Welcome to the "Will You Be My Valentine?" project, a playful and interactive wa
 - **Interactive Question**: The core of the project is the interactive Valentine's Day proposal.
 - **Responsive Design**: Crafted to look great on both desktop and mobile devices.
 - **Playful Interaction**: If the user attempts to click "No", watch out for a little surprise that might just sway their decision!
+- **Complete Questionnaire**: Multi-page questionnaire to plan the perfect date (date selection, food, dessert, activities)
+- **Answer Collection**: All answers are automatically saved to browser localStorage
+- **Download Results**: Users can download their answers as a JSON file
+- **Email Integration**: Optional email functionality to receive answers via EmailJS (see EMAIL_SETUP.md)
+- **Smooth Animations**: Beautiful fade-in animations and hover effects throughout
+- **Better UX**: Improved button interactions, form validation, and visual feedback
 
 ## Technology
 
 This project is built using simple yet powerful web technologies:
 - HTML
-- CSS
-- JavaScript
+- CSS (with animations and transitions)
+- JavaScript (ES6+)
+- LocalStorage (for saving answers)
+- EmailJS (optional, for email functionality)
+
+## Getting Started
+
+1. **Clone or download** this repository
+2. **Open `index.html`** in a web browser
+3. **Optional**: Set up email functionality by following the guide in `EMAIL_SETUP.md`
+
+## How It Works
+
+1. User is asked "Will you be my valentine?"
+2. If they say "Yes", they proceed to a questionnaire
+3. The questionnaire collects:
+   - Preferred date
+   - Food preferences (multiple selections)
+   - Dessert preferences (multiple selections)
+   - Activity preferences (multiple selections)
+4. All answers are saved to browser localStorage
+5. On the final page, users can:
+   - View a summary of their answers
+   - Download answers as a JSON file
+   - Send answers via email (if EmailJS is configured)
+
+## Email Setup
+
+To receive answers via email, you'll need to set up EmailJS. See `EMAIL_SETUP.md` for detailed instructions. The email feature is optional - users can always download their answers instead.
 
 ## How to View
 

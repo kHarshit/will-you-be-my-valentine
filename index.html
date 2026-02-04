@@ -4,29 +4,238 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Be My Valentine</title>
-    <link rel="stylesheet" href="css/valentine.css" />
+    <link rel="stylesheet" href="css/spa.css" />
+    <link rel="stylesheet" href="css/flower.css" />
   </head>
   <body>
-    <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
-    <button class="answerButton" onclick="location.href='thankyou.html'">
-      Yes
-    </button>
-    <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
-    <br />
-    <img src="please.png" height="498px" width="150px" alt="cat asking question" class="responsive" />
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
+    <!-- Section 1: Valentine Question -->
+    <section class="section active" id="section-valentine" data-section="0">
+      <div class="section-content">
+        <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
+        <button class="answerButton" id="yesButton">Yes</button>
+        <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
+        <br />
+        <img src="please.png" height="498px" width="150px" alt="cat asking question" class="responsive" />
+      </div>
+    </section>
+
+    <!-- Section 2: Thank You (after Yes) -->
+    <section class="section" id="section-thankyou" data-section="1">
+      <div class="section-content">
+        <div id="thankyou"><b>Thank you!</b></div>
+        <img height="300px" id="rizz" src="thanks.png" alt="rizzler god" class="responsive" />
+        <br />
+        <audio id="congratulationsAudio" controls autoplay loop>
+          <source src="congratulations.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <h1>Let's plan our perfect date!</h1>
+      </div>
+    </section>
+
+    <!-- Section 3: Date Selection -->
+    <section class="section" id="section-date" data-section="2">
+      <div class="section-content">
+        <h1 title="choose a date">Are you free on ...</h1>
+        <form class="form-group" id="dateForm">
+          <label>Which day: (select a date cuite.. )</label>
+          <div>
+            <input type="date" id="dateInput" required />
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Section 4: Food Selection -->
+    <section class="section" id="section-food" data-section="3">
+      <div class="section-content">
+        <div id="foodquestion"><b>What food would you like to eat?</b></div>
+        <div class="food-selection">
+          <div class="food-item">
+            <img src="food/burgers.jpeg" alt="Burgers, fries and fried chicken" />
+            <label><input type="checkbox" name="food" value="Burgers, fries and fried chicken" />burgers and fried chicken</label>
+          </div>
+          <div class="food-item">
+            <img src="food/dog.jpeg" alt="dog" />
+            <label><input type="checkbox" name="food" value="hotdog" /> hotdog</label>
+          </div>
+          <div class="food-item">
+            <img src="food/koreanfood.jpeg" alt="koreanfood" />
+            <label><input type="checkbox" name="food" value="Korean food" /> korean food</label>
+          </div>
+          <div class="food-item">
+            <img src="food/pasta.jpeg" alt="pasta" />
+            <label><input type="checkbox" name="food" value="pasta" /> pasta</label>
+          </div>
+          <div class="food-item">
+            <img src="food/pizza.jpeg" alt="pizza" />
+            <label><input type="checkbox" name="food" value="pizza" /> pizza</label>
+          </div>
+          <div class="food-item">
+            <img src="food/salad.jpeg" alt="salad" />
+            <label><input type="checkbox" name="food" value="salad" /> salad</label>
+          </div>
+          <div class="food-item">
+            <img src="food/steak.jpeg" alt="steak" />
+            <label><input type="checkbox" name="food" value="steak" /> steak</label>
+          </div>
+          <div class="food-item">
+            <img src="food/sushi.jpeg" alt="sushi" />
+            <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Dessert Selection -->
+    <section class="section" id="section-dessert" data-section="4">
+      <div class="section-content">
+        <div id="dessertquestion"><b>Which dessert we eatin cuh</b></div>
+        <div class="dessert-selection">
+          <div class="dessert-item">
+            <img src="food/boba.jpeg" alt="boba" />
+            <label><input type="checkbox" name="dessert" value="boba" /> boba</label>
+          </div>
+          <div class="dessert-item">
+            <img src="food/churro.jpeg" alt="churro" />
+            <label><input type="checkbox" name="dessert" value="churro" /> churro</label>
+          </div>
+          <div class="dessert-item">
+            <img src="food/che.jpeg" alt="che" />
+            <label><input type="checkbox" name="dessert" value="che" /> che</label>
+          </div>
+          <div class="dessert-item">
+            <img src="food/mochi.jpeg" alt="mochi" />
+            <label><input type="checkbox" name="dessert" value="mochi" /> mochi</label>
+          </div>
+          <div class="dessert-item">
+            <img src="food/randombun.jpeg" alt="randombun" />
+            <label><input type="checkbox" name="dessert" value="randombun" /> random bun</label>
+          </div>
+          <div class="dessert-item">
+            <img src="food/taiyaki.jpeg" alt="taiyaki" />
+            <label><input type="checkbox" name="dessert" value="taiyaki" /> taiyaki</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Activities Selection -->
+    <section class="section" id="section-activities" data-section="5">
+      <div class="section-content">
+        <div id="activityquestion"><b>What are we doing after?</b></div>
+        <div class="activities-selection">
+          <div class="activity-item">
+            <img src="activities/aquarium.jpeg" alt="aquarium" />
+            <label><input type="checkbox" name="activities" value="aquarium" />aquarium</label>
+          </div>
+          <div class="activity-item">
+            <img src="activities/arcade.jpeg" alt="arcade" />
+            <label><input type="checkbox" name="activities" value="arcade" />arcade</label>
+          </div>
+          <div class="activity-item">
+            <img src="activities/cinema.jpeg" alt="cinema" />
+            <label><input type="checkbox" name="activities" value="cinema" />cinema</label>
+          </div>
+          <div class="activity-item">
+            <img src="activities/keramika.jpeg" alt="ceramics" />
+            <label><input type="checkbox" name="activities" value="ceramics" />ceramics</label>
+          </div>
+          <div class="activity-item">
+            <img src="activities/kunsthalle.jpeg" alt="kunsthalle" />
+            <label><input type="checkbox" name="activities" value="kunsthalle" />exhibition</label>
+          </div>
+          <div class="activity-item">
+            <img src="activities/park.jpeg" alt="park" />
+            <label><input type="checkbox" name="activities" value="park" />park</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Final Results -->
+    <section class="section" id="section-results" data-section="6">
+      <div class="section-content">
+        <div id="thankyou-final"><b>Thank you for being my valentine 💕</b></div>
+        
+        <div class="results-container">
+          <h2>Our Perfect Date Plan</h2>
+          <div class="results-summary" id="resultsSummary"></div>
+          
+          <div class="action-buttons">
+            <button class="button" id="downloadButton">📥 Download Answers</button>
+            <button class="button" id="emailButton">📧 Send to Me</button>
+          </div>
+          
+          <div id="emailForm" class="email-form" style="display: none;">
+            <h3>Send Results via Email</h3>
+            <p><small>To use email functionality, you'll need to set up EmailJS. See instructions in EMAIL_SETUP.md</small></p>
+            <input type="email" id="emailInput" placeholder="Your email address" />
+            <button class="button" id="sendEmailButton">Send Email</button>
+            <div id="emailStatus"></div>
+          </div>
+        </div>
+
+        <div class="flower results-flower">
+          <div class="f-wrapper">
+            <div class="flower__line"></div>
+            <div class="f">
+              <div class="flower__leaf flower__leaf--1"></div>
+              <div class="flower__leaf flower__leaf--2"></div>
+              <div class="flower__leaf flower__leaf--3"></div>
+              <div class="flower__leaf flower__leaf--4"></div>
+              <div class="flower__leaf flower__leaf--5"></div>
+              <div class="flower__leaf flower__leaf--6"></div>
+              <div class="flower__leaf flower__leaf--7"></div>
+              <div class="flower__leaf flower__leaf--8 flower__fall-down--yellow"></div>
+            </div>
+          </div>
+          <div class="f-wrapper f-wrapper--2">
+            <div class="flower__line"></div>
+            <div class="f">
+              <div class="flower__leaf flower__leaf--1"></div>
+              <div class="flower__leaf flower__leaf--2"></div>
+              <div class="flower__leaf flower__leaf--3"></div>
+              <div class="flower__leaf flower__leaf--4"></div>
+              <div class="flower__leaf flower__leaf--5"></div>
+              <div class="flower__leaf flower__leaf--6"></div>
+              <div class="flower__leaf flower__leaf--7"></div>
+              <div class="flower__leaf flower__leaf--8 flower__fall-down--pink"></div>
+            </div>
+          </div>
+          <div class="f-wrapper f-wrapper--3">
+            <div class="flower__line"></div>
+            <div class="f">
+              <div class="flower__leaf flower__leaf--1"></div>
+              <div class="flower__leaf flower__leaf--2"></div>
+              <div class="flower__leaf flower__leaf--3"></div>
+              <div class="flower__leaf flower__leaf--4"></div>
+              <div class="flower__leaf flower__leaf--5"></div>
+              <div class="flower__leaf flower__leaf--6"></div>
+              <div class="flower__leaf flower__leaf--7"></div>
+              <div class="flower__leaf flower__leaf--8 flower__fall-down--purple"></div>
+            </div>
+          </div>
+          <div class="flower__glass"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Buttons -->
+    <button class="nav-button prev-button" id="prevButton" style="display: none;">← Previous</button>
+    <button class="nav-button next-button" id="nextButton" style="display: none;">Next →</button>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-      document
-        .getElementById("noButton")
-        .addEventListener("click", function () {
-          var yesButton = document.querySelector(
-            'button[onclick*="thankyou.html"]'
-          );
-          var currentFontSize = parseInt(
-            window.getComputedStyle(yesButton).fontSize
-          );
-          yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
-        });
-    </script>
+      emailjs.init("7qeYaFdfBWuUhVS9m"); // Initialize with your public key
+    </script>    
+    <script src="js/data-collector.js"></script>
+    <script src="js/spa.js"></script>
   </body>
 </html>

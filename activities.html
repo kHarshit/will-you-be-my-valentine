@@ -70,8 +70,40 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
+    <button class="button" id="continueButton">
       Last page ... 
     </button>
+
+    <script src="js/data-collector.js"></script>
+    <script>
+      document.getElementById('continueButton').addEventListener('click', function() {
+        if (typeof valentineData === 'undefined') {
+          console.error('valentineData not loaded');
+          alert('Error: Please refresh the page and try again.');
+          return;
+        }
+        // Collect all selected activities
+        const checkboxes = document.querySelectorAll('input[name="activities"]:checked');
+        const selectedActivities = Array.from(checkboxes).map(cb => cb.value);
+        valentineData.setActivities(selectedActivities);
+        
+        // Verify data was saved
+        const saved = localStorage.getItem('valentine_questionnaire_data');
+        console.log('Activities saved, localStorage contains:', saved);
+        
+        // Add transition effect
+        this.style.transform = 'scale(0.95)';
+        // Wait a bit longer to ensure data is saved and verify it
+        setTimeout(() => {
+          const verifyData = localStorage.getItem('valentine_questionnaire_data');
+          console.log('Before navigation, verifying saved data:', verifyData);
+          if (verifyData) {
+            const parsed = JSON.parse(verifyData);
+            console.log('Parsed verification data:', parsed);
+          }
+          location.href = 'lastpage.html';
+        }, 300);
+      });
+    </script>
   </body>
 </html>
